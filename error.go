@@ -165,7 +165,7 @@ func (err *Error) Error() string {
 		msg = fmt.Sprintf("%s: %s", err.prefix, msg)
 	}
 
-	return msg
+	return err.TypeName() + " " + msg + "\n" + string(err.Stack())
 }
 
 // Stack returns the callstack formatted the same way that go does
@@ -189,7 +189,7 @@ func (err *Error) Callers() []uintptr {
 // ErrorStack returns a string that contains both the
 // error message and the callstack.
 func (err *Error) ErrorStack() string {
-	return err.TypeName() + " " + err.Error() + "\n" + string(err.Stack())
+	return err.Error()
 }
 
 // StackFrames returns an array of frames containing information about the
